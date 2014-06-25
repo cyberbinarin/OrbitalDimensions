@@ -1,5 +1,8 @@
 
 *.csproj
 *.sln
-/OrbitalDimensions/Temp/*
-/OrbitalDimensions/Library/*
+*.userprefs
+
+OrbitalDimensions/Temp/*
+OrbitalDimensions/Library/*
+
