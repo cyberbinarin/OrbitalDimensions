@@ -10,13 +10,15 @@ public class PlayerEnvironmentCollider : MonoBehaviour {
 		player = GetComponentInParent<Player>();
 	}
 
-	public void OnTriggerEnter(Collider other) {
+	public void OnTriggerStay(Collider other) {
 		EnvironmentCollider environment = other.GetComponent<EnvironmentCollider>();
-		if (environment != null) {
+		if (environment != null && player.StandingOn != environment) {
 			Vector2 surfacePoint = environment.globalPositionToSurfacePoint(transform.position);
 			Vector3 surfacePosition = environment.surfacePointToGlobalPosition(surfacePoint);
 			Vector3 surfaceNormal;
+			Debug.DrawLine(transform.position, surfacePosition);
 			if (Vector3.Distance(transform.position, surfacePosition) < radius && canStandAt(surfacePosition, surfaceNormal = environment.surfacePointToGlobalNormal(surfacePoint))) {
+				player.standingPoint = surfacePosition;
 				player.StandingOn = environment;
 			}
 		}
